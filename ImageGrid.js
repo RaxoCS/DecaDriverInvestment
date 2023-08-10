@@ -21,7 +21,7 @@ const ImageGrid = () => {
         // Abre la página web en el navegador predeterminado
         Linking.openURL('https://stonexbullion.com/en/');
     } else if (index === 2) {
-        navigation.navigate('Connect');
+        Linking.openURL('https://www.facebook.com/oscaralejandro.corderosoto');  
     } else {
         navigation.navigate('FAQ');
     }
