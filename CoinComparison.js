@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const CoinComparison = () => {
   const navigation = useNavigation(); // Obtenemos el objeto de navegación
+  const [showImage, setShowImage] = useState(false);
+  const [showText, setShowText] = useState(false);
 
   const handleButtonPress = () => {
     // Lógica para la acción del botón (si es necesario)
@@ -20,19 +22,29 @@ const CoinComparison = () => {
           <Image source={require('./media/Currency2.png')} style={styles.image} />
         </View>
       </View>
+      {showImage && (
+      <Image source={require('./media/Graphic.png')} style={styles.resultImage} />
+      )}
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.imageButton} onPress={() => handleButtonPress()}>
-            <Image source={require('./media/Compare.png')} style={styles.image} />
+        <TouchableOpacity
+          style={styles.imageButton}
+          onPress={() => { setShowImage(true) // Actualiza el estado para mostrar la imagen y el texto
+                           setShowText(true)}} 
+        >
+          <Image source={require('./media/Compare.png')} style={styles.image} />
         </TouchableOpacity>
+
       </View>
       <View style={styles.infoArea}>
+        {showText && (
         <Text style={styles.infoText}>
-        The best coin exchange, and the best economy are Chines Yuan, based on the following variables.{'\n'}
-            - PIB per year{'\n'}
-            - GDP nominal per year{'\n'}
-            - GDP per month{'\n'}
-            - General Grow per year{'\n'}
+          The best coin exchange, and the best economy are Chinese Yuan, based on the following variables.{'\n'}
+          - PIB per year{'\n'}
+          - GDP nominal per year{'\n'}
+          - GDP per month{'\n'}
+          - General Grow per year{'\n'}
         </Text>
+        )}
       </View>
     </View>
   );
@@ -58,29 +70,30 @@ const styles = StyleSheet.create({
   gridContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 20,
+    paddingVertical: 10,
   },
   buttonContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 20,
+    paddingVertical: 1,
   },
   gridRow: {
     flexDirection: 'row',
+    
   },
   imageButton: {
     marginHorizontal: 10,
     borderRadius: 10,
     overflow: 'hidden',
     backgroundColor: '#AEC1D0', // Color de fondo de los botones
-    width: 120,
-    height: 120,
+    width: 100,
+    height: 100,
     justifyContent: 'center',
     alignItems: 'center',
   },
   infoArea: {
     paddingHorizontal: 20,
-    paddingVertical: 10,
+    paddingVertical: 0,
     backgroundColor: '#AEC1D0', // Color de fondo del área de información
   },
   infoText: {
@@ -88,6 +101,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'justify',
   },
+  resultImage: {
+    width: 370,
+    height: 310,
+    alignSelf: 'center'
+  },  
 });
 
 export default CoinComparison;

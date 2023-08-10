@@ -11,7 +11,6 @@ const FAQ = () => {
         <Text style={styles.title}>DecaDriver Investment</Text>
       </View>
       <View style={localStyles.infoContainer}>
-        <Text style={localStyles.infoText}>FAQ</Text>
         <View style={styles.container}>
       <Text style={styles.heading}>Beta version 0.1</Text>
       <Text style={styles.subheading}>Developed by:</Text>
@@ -55,31 +54,31 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#AEC1D0', // Color de fondo de la información
   },
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#ffffff',
-  },
   heading: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 10,
+    textAlign: 'center',
   },
   subheading: {
     fontSize: 18,
     fontWeight: 'bold',
     marginTop: 10,
+    textAlign: 'center',
   },
   paragraph: {
     fontSize: 16,
     marginTop: 5,
+    textAlign: 'center',
   },
   list: {
     marginTop: 5,
+    textAlign: 'center',
   },
   listItem: {
     fontSize: 14,
     marginBottom: 5,
+    textAlign: 'center',
   },
 });
 
