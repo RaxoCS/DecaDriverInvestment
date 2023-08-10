@@ -10,13 +10,14 @@ const CoinComparison = () => {
   const handleButtonPress = () => {
     // Lógica para la acción del botón (si es necesario)
 
-    axios.get('https://localhost/get_image')
-      .then(response => {
-        setData(response.data);
-      })
+    const [imageURL, setImageURL] = useState('');
 
+    axios.get('http://127.0.0.1:5000/get_image')
+      .then(response => {
+        setImageURL(response.data); // Suponiendo que response.data es la URL de la imagen
+      })
       .catch(error => {
-        console.error('Error al obtener los datos:', error);
+        console.error('Error al obtener el enlace de la imagen:', error);
       });
 
   };
@@ -32,8 +33,14 @@ const CoinComparison = () => {
           <Image source={require('./media/Currency2.png')} style={styles.image} />
         </View>
         <View>
-          <Text>Resultado de la API:</Text>
-          <Text>{JSON.stringify(data)}</Text>
+          {imageURL ? (
+            <Image
+              source={{ uri: imageURL }}
+              style={{ width: 200, height: 200 }}
+            />
+          ) : (
+            <Text>Cargando...</Text>
+          )}
         </View>
       </View>
       <View style={styles.buttonContainer}>
