@@ -1,12 +1,24 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
+
 
 const CoinComparison = () => {
   const navigation = useNavigation(); // Obtenemos el objeto de navegación
 
   const handleButtonPress = () => {
     // Lógica para la acción del botón (si es necesario)
+
+    axios.get('https://localhost/get_image')
+      .then(response => {
+        setData(response.data);
+      })
+
+      .catch(error => {
+        console.error('Error al obtener los datos:', error);
+      });
+
   };
 
   return (
@@ -19,19 +31,23 @@ const CoinComparison = () => {
           <Image source={require('./media/Currency1.png')} style={styles.image} />
           <Image source={require('./media/Currency2.png')} style={styles.image} />
         </View>
+        <View>
+          <Text>Resultado de la API:</Text>
+          <Text>{JSON.stringify(data)}</Text>
+        </View>
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.imageButton} onPress={() => handleButtonPress()}>
-            <Image source={require('./media/Compare.png')} style={styles.image} />
+          <Image source={require('./media/Compare.png')} style={styles.image} />
         </TouchableOpacity>
       </View>
       <View style={styles.infoArea}>
         <Text style={styles.infoText}>
-        The best coin exchange, and the best economy are Chines Yuan, based on the following variables.{'\n'}
-            - PIB per year{'\n'}
-            - GDP nominal per year{'\n'}
-            - GDP per month{'\n'}
-            - General Grow per year{'\n'}
+          The best coin exchange, and the best economy are Chines Yuan, based on the following variables.{'\n'}
+          - PIB per year{'\n'}
+          - GDP nominal per year{'\n'}
+          - GDP per month{'\n'}
+          - General Grow per year{'\n'}
         </Text>
       </View>
     </View>
