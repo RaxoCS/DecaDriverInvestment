@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -6,10 +7,15 @@ const CoinComparison = () => {
   const navigation = useNavigation(); // Obtenemos el objeto de navegación
   const [showImage, setShowImage] = useState(false);
   const [showText, setShowText] = useState(false);
+  const [imageURL, setImageURL] = useState('');
 
-  const handleButtonPress = () => {
-    // Lógica para la acción del botón (si es necesario)
-  };
+  axios.get('http://127.0.0.1:5000/get_image')
+      .then(response => {
+        setImageURL(response.data); // Suponiendo que response.data es la URL de la imagen
+      })
+      .catch(error => {
+        console.Log(' ', error);
+      });
 
   return (
     <View style={styles.container}>
@@ -21,6 +27,16 @@ const CoinComparison = () => {
           <Image source={require('./media/Currency1.png')} style={styles.image} />
           <Image source={require('./media/Currency2.png')} style={styles.image} />
         </View>
+      </View>
+      <View>
+          {imageURL ? (
+            <Image
+              source={{ uri: imageURL }}
+              style={{ width: 200, height: 200 }}
+            />
+          ) : (
+            <Text>Cargando...</Text>
+          )}
       </View>
       {showImage && (
       <Image source={require('./media/Graphic.png')} style={styles.resultImage} />
